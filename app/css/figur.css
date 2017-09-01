@@ -7,6 +7,21 @@
 .figur {
   position: absolute;
   display: block;
+  opacity: 0;
+  /* offset-x | offset-y | blur-radius | spread-radius | color */
+  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);}
+
+.figur:hover{
+  animation-name: rotate90;
+  animation-duration: 100ms; /* or: Xms */
+  animation-iteration-count: 2;
+  animation-direction: normal; /* or: normal */
+  animation-fill-mode: both; /* or: backwards, both, none */
+  animation-delay: 200ms; /* or: Xms */
+}
+
+.figur .block{
+  background-color: #8ea2de;
 }
 
 .figur-quadrat {
@@ -19,6 +34,9 @@
   height: 200px;
   margin-left: 150px;
 }
+.figur-lang .block{
+  background-color: #74ccde;
+}
 
 .figur-dreierspitz {
   width: 150px;
@@ -26,10 +44,17 @@
   margin-left: 250px;
 }
 
+.figur-dreierspitz .block{
+  background-color: #637b80;
+}
+
 .figur-zhochrechts {
   width: 100px;
   height: 150px;
   margin-left: 450px;
+}
+.figur-zhochrechts .block{
+  background-color: #93bede;
 }
 
 .figur-zhochlinks {
@@ -37,11 +62,17 @@
   height: 150px;
   margin-left: 600px;
 }
+.figur-zhochlinks .block{
+  background-color: #7ade89;
+}
 
 .figur-lrechts {
   width: 100px;
   height: 150px;
   margin-left: 750px;
+}
+.figur-lrechts .block{
+  background-color: #9aa3de;
 }
 
 .figur-llinks {

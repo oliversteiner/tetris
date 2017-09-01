@@ -1,27 +1,28 @@
-var elem_test = document.getElementById('js-main-test');
-elem_test.style.backgroundColor = "green";
-elem_test.style.color = "white";
+// Test
+// var elem_test = document.getElementById('js-main-test');
+// elem_test.style.backgroundColor = "green";
+// elem_test.style.color = "white";
 
 // Global
-tetris = {};
-tetris.figur_zaehler = 1;
-tetris.spalten_pool = [];
-tetris.spalten = 10;
-tetris.zeilen = 10;
-tetris.zeile_aktuell = 0;
-tetris.delay_ebene_h_spalten = 200;
+var tetris = {
+  play: false,
+  figur_zaehler: 1,
+  spalten_pool: [],
+  spalten: 10,
+  zeilen: 20,
+  zeile_aktuell: 0,
+  delay_ebene_h_spalten: 100,
+  figuren: [
+    'quadrat',
+    'lang',
+    'dreierspitz',
+    'zhochrechts',
+    'zhochlinks',
+    'lrechts',
+    'llinks'
+  ]
 
-interval = {};
-tetris.figuren = [
-  // 'quadrat',  // ist das Null Element
-  'quadrat',
-  'lang',
-  'dreierspitz',
-  'zhochrechts',
-  'zhochlinks',
-  'lrechts',
-  'llinks'
-];
+};
 
 function init() {
 
@@ -34,13 +35,12 @@ function init() {
 
 
 function toggle() {
-  const figur = document.getElementById('figur-test');
-
-  if (figur.classList.contains('active')) {
-    reset()
+  if (tetris.play === false) {
+rain()
   }
   else {
-    figurtest()
+    reset()
+
   }
 
 
@@ -68,21 +68,25 @@ function bewegeFigur(options) {
   var clone = figur.cloneNode(true);
   clone.id = clone_id;
 
-
-  var textNode = document.createTextNode('NEU' + tetris.figur_zaehler);
   tetris.figur_zaehler++;
 
-  clone.replaceChild(textNode, clone.firstChild);
   clone.classList.add('active');
   clone.style.left = left + 'px';
   clone.style.top = top + 'px';
+  clone.style.display = 'block';
 
 
   document.body.appendChild(clone);
   const clone_animate = document.getElementById(clone_id);
 
   setTimeout(function () {
-    clone_animate.classList.add('position-ende-zeile-3');
+
+    var duration = getRandomIntInclusive(15, 45);
+
+    // clone_animate.classList.add('position-ende');
+    clone_animate.classList.add('bounceAndRotate');
+    clone_animate.style.animationDuration = duration + '00ms';
+    //  clone_animate.classList.add('rotate90');
 
   }, 100);
 
@@ -94,9 +98,10 @@ function bewegeFigur(options) {
  *
  */
 function reset() {
-  const figur = document.getElementById('figur-test');
-  figur.classList.remove('position-ende-zeile-3');
-  figur.classList.remove('active');
+  tetris.play = false;
+
+  // die generierten divs entfernen
+
 
   clearInterval(interval[tetris.zeile_aktuell]);
 
@@ -118,11 +123,13 @@ function randomFigur() {
  *
  */
 function rain() {
+  tetris.play = true;
   aufbau_zeilen();
-  var interval_zeilen = window.setInterval(aufbau_zeilen, 2000);
+  interval.make(aufbau_zeilen, 1000);
 
   if (tetris.zeile_aktuell === tetris.zeilen) {
-    clearInterval(interval_zeilen)
+    // clearInterval(interval_zeilen)
+    interval.clearAll();
   }
 }
 
@@ -137,6 +144,10 @@ function aufbau_zeilen() {
   console.log(tetris.zeilen);
   console.log(tetris.delay_ebene_h_spalten);
 
+  if (tetris.zeile_aktuell === tetris.zeilen) {
+    interval.clearAll();
+  }
+
   // Spalten abarbeiten:
   // fülle ein Array mit zahlen von 1 bis 10
   // nimm aus dem Array zufällig eine Zahl heraus,
@@ -146,29 +157,31 @@ function aufbau_zeilen() {
   init();
   tetris.zeile_aktuell++;
 
-  var interval_spalten = window.setInterval(aufbau_spalten, tetris.delay_ebene_h_spalten);
+  interval.make(aufbau_spalten, tetris.delay_ebene_h_spalten);
 
-  var durchlauf = 1;
+  var zaehler = 1;
 
   function aufbau_spalten() {
     // Solange nummern im Pool sind, weitermachen
     if (tetris.spalten_pool.length === 1) {
-      clearInterval(interval_spalten);
+      // clearInterval(interval_spalten);
+      interval.clear(0);
     }
 
-      var spalte = getFromPool();
+    var spalte = getFromPool();
 
-      if (spalte > 0) {
-        console.log(durchlauf + ' Spalte:' + spalte);
+    if (spalte > 0) {
+      console.log(zaehler + ' Spalte:' + spalte);
 
-        var options = {};
-        options.figur_id = 'figur-test';
-        options.spalte = spalte;
-        options.zeile = tetris.zeile_aktuell;
-        bewegeFigur(options)
-      }
-      durchlauf++;
+      var options = {};
+      options.figur_id = 'figur-' + randomFigur();
+      options.spalte = spalte;
+      options.zeile = tetris.zeile_aktuell;
+      bewegeFigur(options)
     }
+    zaehler++;
+  }
+
   // Die zeit vom herunterfallen mit jedem durchlauf verzögern
   tetris.delay_ebene_h_spalten += 10;
 }
@@ -199,3 +212,37 @@ function figurtest() {
 
   bewegeFigur(options)
 }
+
+
+// Verwalten der einzelnen Intervals:
+var interval = {
+  //to keep a reference to all the intervals
+  intervals: {},
+
+  //create another interval
+  make: function (fun, delay) {
+    //see explanation after the code
+    var newInterval = setInterval.apply(
+        window,
+        [fun, delay].concat([].slice.call(arguments, 2))
+    );
+
+    this.intervals[newInterval] = true;
+
+    return newInterval;
+  },
+
+  //clear a single interval
+  clear: function (id) {
+    return clearInterval(this.intervals[id]);
+  },
+
+  //clear all intervals
+  clearAll: function () {
+    var all = Object.keys(this.intervals), len = all.length;
+
+    while (len-- > 0) {
+      clearInterval(all.shift());
+    }
+  }
+};

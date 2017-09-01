@@ -28,9 +28,8 @@
 -->
 
 <!-- Buttons -->
-<button onclick="figurtest()">tests</button>
-<button onclick="reset()">reset</button>
-<button onclick="rain()">Rain</button>
+
+<button class="play-button" onclick="toggle()">PLAY !</button>
 
 <div class="playground">
 
@@ -215,6 +214,7 @@
             <div class="block s1 z4"></div>
             <div class="block s1 z5"></div>
         </div>
+
         <div class="fuenferspalte">
             <div class="block s1 z1"></div>
             <div class="block s1 z4"></div>
@@ -223,13 +223,12 @@
 
     </div>
 
-    <!-- Figur Test-->
-    <div id="figur-test" class="position-start">
-        TEST
-    </div>
+
 
 </div>
 
+<!-- hierhin kommen die generierten figuren -->
+<div id="container-figuren"></div>
 
 <!-- js einbinden -->
 <script src="js/main.js"></script>

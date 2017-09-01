@@ -9,6 +9,7 @@ tetris.spalten_pool = [];
 tetris.spalten = 10;
 tetris.zeilen = 10;
 tetris.zeile_aktuell = 0;
+tetris.delay_ebene_h_spalten = 200;
 
 interval = {};
 tetris.figuren = [
@@ -39,9 +40,7 @@ function toggle() {
     reset()
   }
   else {
-
     figurtest()
-
   }
 
 
@@ -55,7 +54,7 @@ function toggle() {
  * @param zeile
  * @returns {boolean}
  */
-function figurVonOben(options) {
+function bewegeFigur(options) {
 
 
   var figur_id = options.figur_id;
@@ -119,23 +118,25 @@ function randomFigur() {
  *
  */
 function rain() {
+  aufbau_zeilen();
   var interval_zeilen = window.setInterval(aufbau_zeilen, 2000);
 
   if (tetris.zeile_aktuell === tetris.zeilen) {
     clearInterval(interval_zeilen)
   }
-
 }
 
 
 /**
- *
+ * delay : zeit zwischen zwei figuren
  *
  */
 function aufbau_zeilen() {
   console.log('-------------  neue zeile  ----------------');
   console.log(tetris.zeile_aktuell);
   console.log(tetris.zeilen);
+  console.log(tetris.delay_ebene_h_spalten);
+
   // Spalten abarbeiten:
   // fülle ein Array mit zahlen von 1 bis 10
   // nimm aus dem Array zufällig eine Zahl heraus,
@@ -145,7 +146,7 @@ function aufbau_zeilen() {
   init();
   tetris.zeile_aktuell++;
 
-  var interval_spalten = window.setInterval(aufbau_spalten, 200);
+  var interval_spalten = window.setInterval(aufbau_spalten, tetris.delay_ebene_h_spalten);
 
   var durchlauf = 1;
 
@@ -153,15 +154,7 @@ function aufbau_zeilen() {
     // Solange nummern im Pool sind, weitermachen
     if (tetris.spalten_pool.length === 1) {
       clearInterval(interval_spalten);
-
-      // nächste Zeile
     }
-    {
-      if (tetris.spalten_pool.length === 12) {
-
-        // nächste Zeile
-
-      }
 
       var spalte = getFromPool();
 
@@ -172,11 +165,12 @@ function aufbau_zeilen() {
         options.figur_id = 'figur-test';
         options.spalte = spalte;
         options.zeile = tetris.zeile_aktuell;
-        figurVonOben(options)
+        bewegeFigur(options)
       }
       durchlauf++;
     }
-  }
+  // Die zeit vom herunterfallen mit jedem durchlauf verzögern
+  tetris.delay_ebene_h_spalten += 10;
 }
 
 function animate() {
@@ -185,7 +179,6 @@ function animate() {
 
 
 function getFromPool() {
-
   var anzahl = tetris.spalten_pool.length;
   var zufall_zahl = getRandomIntInclusive(1, anzahl);
   return tetris.spalten_pool.splice(zufall_zahl, 1);
@@ -204,5 +197,5 @@ function figurtest() {
   options.spalte = 1;
   options.zeile = 1;
 
-  figurVonOben(options)
+  bewegeFigur(options)
 }

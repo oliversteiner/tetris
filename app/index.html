@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+<link rel="stylesheet" href="css/animate.css">
 <link rel="stylesheet" href="css/main.css">
 <link rel="stylesheet" href="css/block.css">
 <link rel="stylesheet" href="css/ebenen.css">
@@ -12,7 +13,7 @@
 </head>
 
 <body>
-  <!-- display-test -->
+<!-- display-test -->
 <div class="display-test">
     <!-- CSS -->
     <span>CSS:</span>
@@ -27,54 +28,55 @@
     <span id="js-main-test" class="test">main</span>
 
     <!-- Buttons -->
-    <button onclick="figurVonOben()">start</button>
+    <button onclick="toggle()">start</button>
     <button onclick="reset()">reset</button>
+    <button onclick="rain()">rain</button>
 </div>
-<div class="playground">
+<div id="playground" class="playground">
 
-<!-- block -->
-<div class="block"></div>
-
-
-<div class="figur figur-quadrat">
-  <div class="block s1 z1"></div>
-  <div class="block s2 z1"></div>
-  <div class="block s1 z2"></div>
-  <div class="block s2 z2"></div>
-</div>
+    <!-- block -->
+    <div class="block"></div>
 
 
-<div class="figur figur-lang">
-  <div class="block s1 z1"></div>
-  <div class="block s1 z2"></div>
-  <div class="block s1 z3"></div>
-  <div class="block s1 z4"></div>
-</div>
+    <div class="figur figur-quadrat">
+        <div class="block s1 z1"></div>
+        <div class="block s2 z1"></div>
+        <div class="block s1 z2"></div>
+        <div class="block s2 z2"></div>
+    </div>
 
-<div class="figur figur-dreierspitz">
-  <div class="block s1 z2"></div>
-  <div class="block s2 z1"></div>
-  <div class="block s2 z2"></div>
-  <div class="block s3 z2"></div>
 
-  </div>
+    <div class="figur figur-lang">
+        <div class="block s1 z1"></div>
+        <div class="block s1 z2"></div>
+        <div class="block s1 z3"></div>
+        <div class="block s1 z4"></div>
+    </div>
 
-  </div>
+    <div class="figur figur-dreierspitz">
+        <div class="block s1 z2"></div>
+        <div class="block s2 z1"></div>
+        <div class="block s2 z2"></div>
+        <div class="block s3 z2"></div>
 
-</div>
+    </div>
 
 </div>
 
+</div>
 
-  <!-- Figur Test-->
-  <div id="figur-test" class="position-start">
-      TEST
-  </div>
+</div>
 
 
-    <!-- js einbinden -->
-  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
-  <script src="js/main.js"></script>
+<!-- Figur Test-->
+<div id="figur-test" class="position-start">
+    TEST
+</div>
+
+
+<!-- js einbinden -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
+<script src="js/main.js"></script>
 
 </body>
 </html>

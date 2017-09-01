@@ -10,10 +10,22 @@ left: 50px;
   left: 150px;
 }
 
+.position-spalte-4 {
+  left: 150px;
+}
+
+.position-spalte-5 {
+  left: 150px;
+}
+
+.position-spalte-6 {
+  left: 150px;
+}
+
 .position-start {
   position: absolute;
   top: 100px;
-  border: 2px solid #9eff5b;
+  border: 2px solid #ff87a5;
 
 }
 .position-ende-zeile-1 {
@@ -25,10 +37,10 @@ left: 50px;
 }
 .position-ende-zeile-3 {
   position: absolute;
-  top: 500px;
+  top: 800px;
   transition: all;
   transition-duration: 300ms;
-  transition-timing-function: linear;
-  border: 2px solid red;
+  animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+  transform: translate3d(0,0,0);
 }
 

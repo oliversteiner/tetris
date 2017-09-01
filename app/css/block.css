@@ -24,6 +24,14 @@ background-color: green;
   left: 100px;
 }
 
+.s4 {
+  left: 150px;
+}
+
+.s5 {
+  left: 200px;
+}
+
 .z1 {
   top: 0px;
 }
@@ -38,4 +46,8 @@ background-color: green;
 
 .z4 {
   top: 150px;
+}
+
+.z5 {
+  top: 200px;
 }

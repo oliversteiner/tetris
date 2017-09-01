@@ -49,3 +49,25 @@
   height: 150px;
   margin-left: 900px;
 }
+
+.container-tetrisschrift {
+  width: 1550px;
+  height: 250px;
+  margin-top: 300px;
+  position: relative;
+}
+
+.fuenferspalte {
+  width: 50px;
+  height: 250px;
+  position: relative;
+  float: left;
+}
+
+.abstandlinks100{
+  margin-left: 100px;
+}
+
+.abstandlinks50{
+  margin-left: 50px;
+}

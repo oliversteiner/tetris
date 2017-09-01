@@ -1,3 +1,8 @@
+.test-effects{
+  background-color: green;
+  color: white;
+}
+
 .display-test{
   margin: 5px;
   font-family: sans-serif;
@@ -11,5 +16,15 @@
 .test-main{
   background-color: green;
   color: white;
+
+}
+
+#figur-test {
+  position: absolute;
+  left: 100px;
+  width: 100px;
+  height: 100px;
+  display: block;
+
 
 }

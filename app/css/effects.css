@@ -1,0 +1,34 @@
+.position-spalte-1 {
+left: 50px;
+}
+
+.position-spalte-2 {
+  left: 100px;
+}
+
+.position-spalte-3 {
+  left: 150px;
+}
+
+.position-start {
+  position: absolute;
+  top: 100px;
+  border: 2px solid #9eff5b;
+
+}
+.position-ende-zeile-1 {
+  bottom: 1px;
+
+}
+.position-ende-zeile-2 {
+  bottom: 50px;
+}
+.position-ende-zeile-3 {
+  position: absolute;
+  top: 500px;
+  transition: all;
+  transition-duration: 300ms;
+  transition-timing-function: linear;
+  border: 2px solid red;
+}
+

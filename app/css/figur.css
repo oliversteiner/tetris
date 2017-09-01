@@ -25,3 +25,27 @@
   height: 100px;
   margin-left: 250px;
 }
+
+.figur-zhochrechts {
+  width: 100px;
+  height: 150px;
+  margin-left: 450px;
+}
+
+.figur-zhochlinks {
+  width: 100px;
+  height: 150px;
+  margin-left: 600px;
+}
+
+.figur-lrechts {
+  width: 100px;
+  height: 150px;
+  margin-left: 750px;
+}
+
+.figur-llinks {
+  width: 100px;
+  height: 150px;
+  margin-left: 900px;
+}

@@ -28,3 +28,11 @@
 
 
 }
+.playground {
+  position: relative;
+  margin-top: 100px;
+  margin-left: 100px;
+  border: solid 1px silver;
+  height: 850px;
+  width: 1550px;
+}

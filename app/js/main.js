@@ -31,3 +31,9 @@ function reset() {
   figur.classList.remove('position-ende-zeile-3')
 
 }
+
+function bounce(){
+  var all_blocks = document.getElementsByClassName('block')
+    all_blocks.classList.add('animate','bon');
+
+}

@@ -7,6 +7,7 @@ gulp.task('start', function() {
         livereload: true,
         directoryListing: false,
         defaultFile:'index.html',
-        open: true
+        open: true,
+        log: 'error'
       }));
 });

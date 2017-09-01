@@ -4,8 +4,10 @@
 
 }
 
-.figur-lang {
-  background-color: blue;
-  height: 200px;
-  width: 50px;
+.figur {
+  position: relative;
+}
+
+.quadrat {
+
 }

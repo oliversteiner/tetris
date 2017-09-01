@@ -13,13 +13,17 @@ background-color: green;
 }
 
 .s1 {
-
+  left: 0px;
 }
 
 .s2 {
-
+  left: 50px;
 }
 
 .z1 {
+  top: 0px;
+}
 
+.z2 {
+  top: 50px;
 }

@@ -4,6 +4,8 @@
 <link rel="stylesheet" href="css/block.css">
 <link rel="stylesheet" href="css/ebenen.css">
 <link rel="stylesheet" href="css/figur.css">
+<link rel="stylesheet" href="css/effects.css">
+
 <head>
     <meta charset="UTF-8">
     <title>Tetris</title>
@@ -18,11 +20,15 @@
     <span class="test test-ebenen">ebenen</span>
     <span class="test test-figur">figur</span>
     <span class="test test-main">main</span>
+    <span class="test test-effects">effects</span>
 
     <!-- JS -->
     <span>JS:</span>
     <span id="js-main-test" class="test">main</span>
 
+    <!-- Buttons -->
+    <button onclick="figurVonOben()">start</button>
+    <button onclick="reset()">reset</button>
 </div>
 <div class="playground">
 
@@ -55,9 +61,16 @@
 
 </div>
 
-    <!-- js einbinden -->
-    <script src="js/main.js"></script>
 
-</div>
+  <!-- Figur Test-->
+  <div id="figur-test" class="position-start">
+      TEST
+  </div>
+
+
+    <!-- js einbinden -->
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
+  <script src="js/main.js"></script>
+
 </body>
 </html>

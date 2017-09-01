@@ -5,9 +5,23 @@
 }
 
 .figur {
-  position: relative;
+  position: absolute;
+  display: block;
 }
 
-.quadrat {
+.figur-quadrat {
+  width: 100px;
+  height: 100px;
+}
 
+.figur-lang {
+  width: 50px;
+  height: 200px;
+  margin-left: 150px;
+}
+
+.figur-dreierspitz {
+  width: 150px;
+  height: 100px;
+  margin-left: 250px;
 }

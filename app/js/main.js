@@ -33,13 +33,57 @@ function init() {
   console.log(tetris.spalten_pool);
 }
 
+/**
+ *
+ *
+ */
+function play() {
+  tetris.play = true;
+  var $play_button = document.getElementsByClassName('play-button')[0];
+  var $reset_button = document.getElementsByClassName('reset-button')[0];
+
+  // Playbutton ausblenden
+  $play_button.style.display = 'none';
+  $reset_button.style.display = 'block';
+
+  rain()
+
+}
+
+/**
+ *
+ *
+ */
+function reset() {
+  console.log('reset');
+  tetris.play = false;
+  var $play_button = document.getElementsByClassName('play-button')[0];
+  var $reset_button = document.getElementsByClassName('reset-button')[0];
+
+
+
+  interval.clearAll();
+
+  var nodes = document.getElementsByClassName('figur'),
+      i = nodes.length;
+
+  while(i--) {
+    nodes[i].classList.remove('bounceAndRotate');
+  }
+  removeGeneratedFigures();
+
+
+      init();
+  $play_button.style.display = 'block';
+  $reset_button.style.display = 'none';
+}
 
 function toggle() {
   if (tetris.play === false) {
-rain()
+    play();
   }
   else {
-    reset()
+    reset();
 
   }
 
@@ -93,20 +137,7 @@ function bewegeFigur(options) {
   return true;
 }
 
-/**
- *
- *
- */
-function reset() {
-  tetris.play = false;
 
-  // die generierten divs entfernen
-
-
-  clearInterval(interval[tetris.zeile_aktuell]);
-
-  init();
-}
 
 /**
  *
@@ -246,3 +277,11 @@ var interval = {
     }
   }
 };
+
+function removeGeneratedFigures() {
+
+  var $container_figuren = document.getElementById('container-figuren');
+  $container_figuren.parentNode.removeChild($container_figuren);
+
+
+}

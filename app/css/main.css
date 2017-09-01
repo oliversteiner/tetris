@@ -1,36 +1,28 @@
-body{
+body {
   background-color: black;
 }
-
-.test-effects{
+.test-effects {
   background-color: green;
   color: white;
 }
-
-.display-test{
+.display-test {
   margin: 5px;
   font-family: sans-serif;
-
 }
 .display-test span.test {
   padding: 10px;
   border: solid 1px gray;
 }
-
-.test-main{
+.test-main {
   background-color: green;
   color: white;
-
 }
-
 #figur-test {
   position: absolute;
   left: 100px;
   width: 100px;
   height: 100px;
   display: block;
-
-
 }
 .playground {
   position: relative;
@@ -38,4 +30,44 @@ body{
   margin-left: 20px;
   height: 850px;
   width: 1550px;
+}
+/* Play */
+
+.play-button {
+  position: absolute;
+  top: 30vh;
+  left: 45vw;
+  background: url("../images/play.svg") no-repeat top left;
+  background-size: cover;
+  cursor: pointer;
+  width: 200px;
+  height: 200px;
+  opacity: 0.1;
+}
+.play-button:hover {
+  opacity: 0.5;
+}
+.play-button:active {
+  opacity: 1;
+}
+/* RESET */
+
+.reset-button {
+  display: none;
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background: url("../images/reset.svg") no-repeat top left;
+  background-size: cover;
+  cursor: pointer;
+  width: 50px;
+  height: 50px;
+  opacity: 0.2;
+  z-index: 999;
+}
+.reset-button:hover {
+  opacity: 0.6;
+}
+.reset-button:active {
+  opacity: 1;
 }

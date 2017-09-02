@@ -61,19 +61,19 @@ function reset() {
   var $reset_button = document.getElementsByClassName('reset-button')[0];
 
 
-
   interval.clearAll();
+  tetris.zeile_aktuell= 0;
 
   var nodes = document.getElementsByClassName('figur'),
       i = nodes.length;
 
-  while(i--) {
+  while (i--) {
     nodes[i].classList.remove('bounceAndRotate');
   }
   removeGeneratedFigures();
 
 
-      init();
+  init();
   $play_button.style.display = 'block';
   $reset_button.style.display = 'none';
 }
@@ -136,7 +136,6 @@ function bewegeFigur(options) {
 
   return true;
 }
-
 
 
 /**

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+    <meta charset="UTF-8">
+    <title>Tetris</title>
+
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/block.css">
+    <link rel="stylesheet" href="css/ebenen.css">
+    <link rel="stylesheet" href="css/figur.css">
+    <link rel="stylesheet" href="css/effects.css">
+    <link rel="stylesheet" href="css/animate.css">
+
+</head>
+
+<body>
+<!-- display-test -->
+<!--
+<div class="display-test">
+    <span>CSS:</span>
+    <span class="test test-block">block</span>
+    <span class="test test-ebenen">ebenen</span>
+    <span class="test test-figur">figur</span>
+    <span class="test test-main">main</span>
+    <span class="test test-effects">effects</span>
+    <span>JS:</span>
+    <span id="js-main-test" class="test">main</span>
+</div>
+-->
+
+<!-- Buttons -->
+
+
+
+<div class="playground">
+
+    <!-- block -->
+    <div class="block"></div>
+
+
+    <!-- inject:views/figuren.html -->
+    <!-- endinject -->
+
+    <!-- inject:views/schrift.html -->
+    <!-- endinject -->
+
+
+
+
+</div>
+
+<div class="play-button"></div>
+
+<div class="reset-button"></div>
+
+
+<!-- hierhin kommen die generierten figuren -->
+<div id="container-figuren"></div>
+
+<!-- inject:js -->
+<!-- endinject -->
+
+
+<script>
+  SystemJS.import('/js/main.js');
+</script>
+
+</body>
+</html>

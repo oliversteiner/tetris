@@ -1,58 +1,16 @@
-//
-//
-// https://www.npmjs.com/package/connect
-// https://github.com/napcs/node-livereload
-//
+var liveServer = require("live-server");
 
-var connect = require('connect');
-var ServeStatic = require('serve-static');
-var OpenUrl = require('openurl');
-
-
-var server = connect();
-var app = {
-  root: 'app',
-  port: 8808,
-  host: 'localhost'
+var params = {
+  port: 8181, // Set the server port. Defaults to 8080.
+  host: "localhost", // Set the address to bind to. Defaults to 0.0.0.0 or process.env.IP.
+  root: "/app", // Set root directory that's being served. Defaults to cwd.
+  open: false, // When false, it won't load your browser by default.
+  ignore: '', // comma-separated string for paths to ignore
+  file: "index.html", // When set, serve this file for every 404 (useful for single-page applications)
+  wait: 1000, // Waits for all changes, before reloading. Defaults to 0 sec.
+  mount: [['/components', './node_modules']], // Mount a directory to a route.
+  logLevel: 2, // 0 = errors only, 1 = some, 2 = lots
+  middleware: [function(req, res, next) { next(); }] // Takes an array of Connect-compatible middleware that are injected into the server middleware stack
 };
 
-server.use(ServeStatic(__dirname + '/' + app.root));
-
-server.listen(app.port);
-
-
-server.use(function(req, res){
-  server.end('Hello from Connect!\n');
-});
-
-
-server.use(function (req, res, next) {
-  var filename = path.basename(req.url);
-  var extension = path.extname(filename);
-  if (extension === '.css')
-    console.log("The file " + filename + " was requested.");
-  next();
-});
-
-/*
-
-server.on(function () {
-  console.log('server started on: ' + 'http://'+app.host+':'+app.port+'/');
-
-});
-*/
-
-
-var livereload = require('livereload');
-var reloadServer = livereload.createServer();
-
-var watchdir = __dirname + '/' + app.root;
-console.log(watchdir);
-reloadServer.watch(watchdir, { recursive: true }, function(evt, name) {
-  console.log('%s changed.', name);
-});
-
-
-var url = 'http://' + app.host + ':' + app.port + '/';
-OpenUrl.open(url);
-
+liveServer.start(params);

@@ -1,0 +1,1 @@
+{"version":3,"sources":["ebenen.scss"],"names":[],"mappings":"AAAA,aACE,uBAAuB,AACvB,UAAY,CAEb","file":"../ebenen.css","sourcesContent":[".test-ebenen{\n  background-color: green;\n  color: white;\n\n}"]}

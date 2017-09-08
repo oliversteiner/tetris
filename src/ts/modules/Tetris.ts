@@ -1,6 +1,7 @@
 import {Interval} from "./Interval";
 import {OstUtil} from "./OstUtil";
 
+
 export class Tetris {
     interval: Interval;
     greeting: string;
@@ -246,6 +247,7 @@ export class Tetris {
     public animate() {
         let all_blocks = document.getElementsByClassName('block');
     }
+
 
 
     public getFromPool() {

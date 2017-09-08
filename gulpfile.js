@@ -73,8 +73,8 @@ gulp.task('html-inject', function () {
   // Views
       .pipe(inject(
           gulp.src([html_views]), {
-            starttag : '<!-- inject:{{path}} -->',
-            relative : true,
+            starttag: '<!-- inject:{{path}} -->',
+            relative: true,
             transform: function (filePath, file) {
               // return file contents as string
               return file.contents.toString('utf8')
@@ -83,8 +83,8 @@ gulp.task('html-inject', function () {
       // Panels
       .pipe(inject(
           gulp.src([html_panels]), {
-            starttag : '<!-- inject-panel:{{path}} -->',
-            relative : true,
+            starttag: '<!-- inject-panel:{{path}} -->',
+            relative: true,
             transform: function (filePath, file) {
               // return file contents as string
               return file.contents.toString('utf8')
@@ -128,25 +128,12 @@ const libraries_dest = 'app/vendor';
 const libraries_list = [
   node_modules + 'jquery/dist/jquery.min.js',
   node_modules + 'velocity-animate/velocity.min.js',
-  node_modules + 'systemjs/dist/system-production.js'
+  node_modules + 'systemjs/dist/system.js'
 ];
 
 
 gulp.task('copy-vendor', function (cb) {
   copy(libraries_list, libraries_dest, {'base': node_modules}, cb);
-});
-
-
-
-gulp.task('build-sjs', function () {
-  var builder = systemjsBuilder();
-  builder.loadConfigSync('./system.config.js');
-
-  builder.buildStatic('src/js/main.js', {
-    minify: false,
-    mangle: false
-  })
-      .pipe(gulp.dest('./build'));
 });
 
 
@@ -158,5 +145,4 @@ gulp.task('default', function () {
   gulp.watch(images_watch, ['copy-images']);
   gulp.watch(data_watch, ['copy-data']);
   gulp.watch(vendor_watch, ['copy-vendor']);
-
 });

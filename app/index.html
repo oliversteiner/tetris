@@ -7,18 +7,18 @@
     <title>Tetris</title>
 
     <link rel="stylesheet" href="css/main.css">
-    <link rel="stylesheet" href="css/block.css">
-    <link rel="stylesheet" href="css/ebenen.css">
-    <link rel="stylesheet" href="css/figur.css">
-    <link rel="stylesheet" href="css/effects.css">
-    <link rel="stylesheet" href="css/animate.css">
 
 </head>
 
 <body>
 <!-- Buttons -->
 
+<!-- inject:views/canvas.html -->
+<div id="canvas-container">
+<h1>Canvas</h1>
+</div>
 
+<!-- endinject -->
 
 <div class="playground">
 
@@ -236,13 +236,23 @@
 <!-- inject:js -->
 <script src="vendor/velocity-animate/velocity.min.js"></script>
 <script src="vendor/jquery/dist/jquery.min.js"></script>
-<script src="vendor/systemjs/dist/system-production.js"></script>
+<script src="vendor/systemjs/dist/system.js"></script>
 <!-- endinject -->
 
-
 <script>
-  SystemJS.import('/js/main.js');
 </script>
+<script>
+  System.config({
+    packages: {
+      './js': {
+        defaultExtension: 'js'
+      }
+    }
+  });
+  SystemJS.import('js/main.js');
+
+</script>
+
 
 </body>
 </html>

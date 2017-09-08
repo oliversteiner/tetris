@@ -138,9 +138,12 @@ gulp.task('copy-vendor', function (cb) {
 
 
 
+
 gulp.task('build-sjs', function () {
   var builder = systemjsBuilder();
   builder.loadConfigSync('./system.config.js');
+
+//  builder.reset();
 
   builder.buildStatic('app/js/main.js', {
     minify: false,
@@ -151,7 +154,7 @@ gulp.task('build-sjs', function () {
 
 
 // Watch task
-gulp.task('default', function () {
+gulp.task('default', function ()  {
   gulp.watch(input_sass, ['sass']);
   gulp.watch(input_ts, ['typescript']);
   gulp.watch(html_watch, ['html-inject']);
@@ -160,3 +163,22 @@ gulp.task('default', function () {
   gulp.watch(vendor_watch, ['copy-vendor']);
 
 });
+
+
+/*
+var path = require("path");
+var Builder = require('systemjs-builder');
+
+// optional constructor options
+// sets the baseURL and loads the configuration file
+var builder = new Builder('path/to/baseURL', 'path/to/system/config-file.js');
+
+builder
+    .bundle('local/module.js', 'outfile.js')
+    .then(function() {
+      console.log('Build complete');
+    })
+    .catch(function(err) {
+      console.log('Build error');
+      console.log(err);
+    });*/

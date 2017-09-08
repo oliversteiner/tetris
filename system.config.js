@@ -2,10 +2,10 @@ System.config({
   transpiler: 'typescript',
   packages: {
     src: {
-      defaultExtension: 'ts'
+   //   defaultExtension: 'ts'
     }
   }
 });
 System
-    .import('src/js/main.ts')
+    .import('app/js/main.js')
     .then(null, console.error.bind(console));

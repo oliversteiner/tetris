@@ -142,7 +142,7 @@ gulp.task('build-sjs', function () {
   var builder = systemjsBuilder();
   builder.loadConfigSync('./system.config.js');
 
-  builder.buildStatic('src/ts/main.ts', {
+  builder.buildStatic('src/js/main.js', {
     minify: false,
     mangle: false
   })

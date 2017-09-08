@@ -1,4 +1,4 @@
 System.config({
-  transpiler: 'typescript',
+  transpiler: 'typescript'
 
 });

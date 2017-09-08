@@ -50,10 +50,6 @@ export class Tetris {
     }
 
 
-    public greet() {
-        return "Hello, " + this.greeting;
-    }
-
     public init() {
 
         // füllen:

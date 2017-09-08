@@ -1,20 +1,21 @@
 // Verwalten der einzelnen Intervals:
 
-export class Interval {
+export default class Interval {
 
     //to keep a reference to all the intervals
-    intervals:any;
+    intervals:any = [];
 
     //create another interval
 
     public make(fun:any, delay:any) {
         //see explanation after the code
-        let newInterval:string = setInterval.apply(
+        let newInterval:any = setInterval.apply(
             window,
             [fun, delay].concat([].slice.call(arguments, 2))
         );
 
         this.intervals[newInterval] = true;
+
 
         return newInterval;
     }
@@ -22,7 +23,9 @@ export class Interval {
 
 
     //clear a single interval
-    public clear(interval_id:string) {
+    public clear(interval_id:number) {
+        let all:any = Object.keys(this.intervals);
+console.log(all);
         return clearInterval(this.intervals[interval_id]);
     }
 

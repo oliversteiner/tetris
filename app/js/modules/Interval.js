@@ -3,6 +3,8 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var Interval = /** @class */ (function () {
     function Interval() {
+        //to keep a reference to all the intervals
+        this.intervals = [];
     }
     //create another interval
     Interval.prototype.make = function (fun, delay) {
@@ -13,6 +15,8 @@ var Interval = /** @class */ (function () {
     };
     //clear a single interval
     Interval.prototype.clear = function (interval_id) {
+        var all = Object.keys(this.intervals);
+        console.log(all);
         return clearInterval(this.intervals[interval_id]);
     };
     //clear all intervals
@@ -25,4 +29,4 @@ var Interval = /** @class */ (function () {
     };
     return Interval;
 }());
-exports.Interval = Interval;
+exports.default = Interval;

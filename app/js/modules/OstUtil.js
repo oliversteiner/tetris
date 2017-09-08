@@ -11,4 +11,4 @@ var OstUtil = /** @class */ (function () {
     };
     return OstUtil;
 }());
-exports.OstUtil = OstUtil;
+exports.default = OstUtil;

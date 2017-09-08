@@ -1,5 +1,4 @@
-
-export class OstUtil{
+export default class OstUtil{
 
     // Zufallszahlen inklusive die Randbedingungen
     public getRandomIntInclusive(min:number, max:number) {
@@ -8,4 +7,3 @@ export class OstUtil{
         return Math.floor(Math.random() * (max - min + 1)) + min;
     }
 }
-

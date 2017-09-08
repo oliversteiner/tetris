@@ -1,17 +1,18 @@
-import {Interval} from "./Interval";
-import {OstUtil} from "./OstUtil";
+import Interval from "./Interval";
+// import OstUtil from "./OstUtil";
 
 
-export class Tetris {
-    interval: Interval;
-    greeting: string;
+export default class Tetris {
+    interval = new Interval();
+    // ostUtil = new OstUtil();
     is_playing: boolean;
-    figur_zaehler: number = 1;
-    spalten_pool: any = [];
-    spalten: number = 10;
-    zeilen: number = 20;
-    zeile_aktuell: number = 0;
-    delay_ebene_h_spalten: number = 100;
+    figur_zaehler: number;
+    spalten_pool: any;
+    spalten_max: number;
+    zeilen_max: number;
+    zaehler_spalte: number;
+    zeile_aktuell: number;
+    delay_ebene_h_spalten: number;
     figuren: any = [
         'quadrat',
         'lang',
@@ -23,38 +24,51 @@ export class Tetris {
     ];
 
     // DOM
-
-
-
-
-    $container_figuren:HTMLDivElement = document.getElementById('container-figuren') as HTMLDivElement;
-
+    $container_figuren: HTMLDivElement = document.getElementById('container-figuren') as HTMLDivElement;
 
     // Buttons
-    $reset_button: HTMLButtonElement = document.getElementsByClassName('play-button')[0] as HTMLButtonElement;
-    $play_button: HTMLButtonElement = document.getElementsByClassName('reset-button')[0] as HTMLButtonElement;
-    private ostUtil: OstUtil;
+    $play_button: HTMLDivElement = document.getElementsByClassName('play-button')[0] as HTMLDivElement;
+    $reset_button: HTMLDivElement = document.getElementsByClassName('reset-button')[0] as HTMLDivElement;
 
-
+    /**
+     *
+     *
+     */
     constructor() {
+        console.log('--------  constructor  ---------------');
+        this.addEventListeners();
+        this.reset_data();
+        this.reset_spalten_pool();
 
-        this.init();
-        this.interval = new Interval();
-        this.ostUtil = new OstUtil();
+        this.play();
 
-        // DOM Loaded
-        const scope = this;
-        window.document.addEventListener("load", function () {
-            // Handle event
-            scope.addEventListeners();
-        });
     }
 
 
-    public init() {
+    public reset_data() {
+        this.figur_zaehler = 1;
+        this.spalten_pool = [];
+        this.spalten_max = 10;
+        this.zeilen_max = 20;
+        this.zaehler_spalte = 0;
+        this.zeile_aktuell = 0;
+        this.delay_ebene_h_spalten = 100;
+
+        console.log('figur_zaehler:' + this.figur_zaehler);
+        console.log('spalten_pool:' + this.spalten_pool);
+        console.log('spalten_max:' + this.spalten_max);
+        console.log('zeilen_max:' + this.zeilen_max);
+        console.log('zaehler_spalte:' + this.zaehler_spalte);
+        console.log('zeile_aktuell:' + this.zeile_aktuell);
+        console.log('this.delay_ebene_h_spalten:' + this.delay_ebene_h_spalten);
+
+    }
+
+    public reset_spalten_pool() {
+        console.log('--------  reset_spalten_pool  ---------------');
 
         // füllen:
-        for (let i = 1; i < this.spalten; i++) {
+        for (let i = 1; i < this.spalten_max; i++) {
             this.spalten_pool.push(i);
         }
         console.log(this.spalten_pool);
@@ -63,8 +77,20 @@ export class Tetris {
 
     private addEventListeners() {
 
-        this.$play_button.addEventListener('click', this.play);
-        this.$reset_button.addEventListener('click', this.reset);
+        let scope = this;
+        this.$play_button.addEventListener('click', function () {
+            console.log(' ____');
+            console.log('[____]  Play');
+
+            scope.play();
+        });
+
+        this.$reset_button.addEventListener('click', function () {
+            console.log(' ____');
+            console.log('[____]  Reset');
+
+            scope.reset();
+        });
 
     };
 
@@ -73,7 +99,7 @@ export class Tetris {
      *
      *
      */
-    public play = () => {
+    public play() {
         this.is_playing = true;
 
         // Playbutton ausblenden
@@ -102,19 +128,20 @@ export class Tetris {
         }
         this.removeGeneratedFigures();
 
-
-        this.init();
+        this.reset_spalten_pool();
         this.$play_button.style.display = 'block';
         this.$reset_button.style.display = 'none';
     };
 
+    /**
+     *
+     */
     public toggle() {
         if (this.is_playing === false) {
             this.play();
         }
         else {
             this.reset();
-
         }
 
 
@@ -126,7 +153,7 @@ export class Tetris {
      * @returns {boolean}
      * @this options
      */
-    public bewegeFigur(options: any) {
+    public bewegeFigur( options: any ) {
 
 
         let figur_id = options.figur_id;
@@ -142,18 +169,19 @@ export class Tetris {
 
         this.figur_zaehler++;
 
+        clone.style.display = 'block';
         clone.classList.add('active');
         clone.style.left = left + 'px';
         clone.style.top = top + 'px';
-        clone.style.display = 'block';
 
 
         document.body.appendChild(clone);
         const clone_animate = document.getElementById(clone_id);
 
+        const scope = this;
         setTimeout(function () {
 
-            let duration = this.getRandomIntInclusive(15, 45);
+            let duration = scope.getRandomIntInclusive(15, 45);
 
             // clone_animate.classList.add('position-ende');
             clone_animate.classList.add('bounceAndRotate');
@@ -172,7 +200,7 @@ export class Tetris {
      * @returns {*|string}
      */
     public randomFigur() {
-        let zufall = this.ostUtil.getRandomIntInclusive(0, 6);
+        let zufall = this.getRandomIntInclusive(0, 6);
         return this.figuren[zufall];
     }
 
@@ -185,7 +213,7 @@ export class Tetris {
         this.aufbau_zeilen();
         this.interval.make(this.aufbau_zeilen, 1000);
 
-        if (this.zeile_aktuell === this.zeilen) {
+        if (this.zeile_aktuell === this.zeilen_max) {
             // clearInterval(interval_zeilen)
             this.interval.clearAll();
         }
@@ -196,13 +224,13 @@ export class Tetris {
      * delay : zeit zwischen zwei figuren
      *
      */
-    public aufbau_zeilen() {
+    public aufbau_zeilen = () => {
         console.log('-------------  neue zeile  ----------------');
-        console.log(this.zeile_aktuell);
-        console.log(this.zeilen);
-        console.log(this.delay_ebene_h_spalten);
+        console.log('-- zeile_aktuell:'+ this.zeile_aktuell);
+        console.log('-- zeilen_max:'+ this.zeilen_max);
+        console.log('-- delay_ebene_h_spalten:'+ this.delay_ebene_h_spalten);
 
-        if (this.zeile_aktuell === this.zeilen) {
+        if (this.zeile_aktuell === this.zeilen_max) {
             this.interval.clearAll();
         }
 
@@ -212,47 +240,42 @@ export class Tetris {
         // mach das mit allen Zahlen, bis das Array leer ist
 
         // poolfüllen:
-        this.init();
+        this.reset_spalten_pool();
+
+       // this.zaehler_spalte = 1;
+        this.interval.make(this.aufbau_spalten, this.delay_ebene_h_spalten);
         this.zeile_aktuell++;
-
-        this.interval.make(aufbau_spalten, this.delay_ebene_h_spalten);
-
-        let zaehler = 1;
-
-        function aufbau_spalten() {
-            // Solange nummern im Pool sind, weitermachen
-            if (this.spalten_pool.length === 1) {
-                // clearInterval(interval_spalten);
-                this.interval.clear(0);
-            }
-
-            let spalte = this.getFromPool();
-
-            if (spalte > 0) {
-                console.log(zaehler + ' Spalte:' + spalte);
-
-                let options: any = {};
-                options.figur_id = 'figur-' + this.randomFigur();
-                options.spalte = spalte;
-                options.zeile = this.zeile_aktuell;
-                this.bewegeFigur(options)
-            }
-            zaehler++;
-        }
 
         // Die zeit vom herunterfallen mit jedem durchlauf verzögern
         this.delay_ebene_h_spalten += 10;
-    }
+    };
 
-    public animate() {
-        let all_blocks = document.getElementsByClassName('block');
-    }
 
+    public aufbau_spalten = () => {
+        // Solange nummern im Pool sind, weitermachen
+        console.log('spalten_pool.length:' +this.spalten_pool.length);
+        if (this.spalten_pool.length === 1) {
+            this.interval.clear(0);
+        }
+
+        let spalte = this.getFromPool();
+
+        if (spalte > 0) {
+            console.log(this.zaehler_spalte + ' Spalte:' + spalte);
+
+            let options: any = {};
+            options.figur_id = 'figur-' + this.randomFigur();
+            options.spalte = spalte;
+            options.zeile = this.zeile_aktuell;
+            this.bewegeFigur(options)
+        }
+        this.zaehler_spalte++;
+    };
 
 
     public getFromPool() {
         let anzahl = this.spalten_pool.length;
-        let zufall_zahl = this.ostUtil.getRandomIntInclusive(1, anzahl);
+        let zufall_zahl = this.getRandomIntInclusive(1, anzahl);
         return this.spalten_pool.splice(zufall_zahl, 1);
     }
 
@@ -262,17 +285,19 @@ export class Tetris {
         options.figur_id = 'figur-test';
         options.spalte = 1;
         options.zeile = 1;
-
         this.bewegeFigur(options)
     }
 
 
     public removeGeneratedFigures() {
-
         this.$container_figuren.parentNode.removeChild(this.$container_figuren);
+    }
 
-
+    // Zufallszahlen inklusive die Randbedingungen
+    public getRandomIntInclusive( min: number, max: number ) {
+        min = Math.ceil(min);
+        max = Math.floor(max);
+        return Math.floor(Math.random() * (max - min + 1)) + min;
     }
 
 }
-
